@@ -1,0 +1,39 @@
+{
+  "business_name": "Bloom Aesthetics Clinic",
+  "hours": "Monday to Saturday, 9:00 AM to 7:00 PM",
+  "services": [
+    {
+      "name": "Botox",
+      "price_from": "£200",
+      "description": "Anti-wrinkle injections. Prices vary by area treated."
+    },
+    {
+      "name": "Dermal Fillers",
+      "price_from": "£250",
+      "description": "Lip, cheek, and jawline fillers. Prices vary by area and amount."
+    },
+    {
+      "name": "Consultation",
+      "price_from": "Free",
+      "description": "Initial consultation with a practitioner to discuss treatment options."
+    }
+  ],
+  "booking": {
+    "methods": ["WhatsApp", "website"],
+    "cancellation_policy": "24-hour notice required for cancellations",
+    "deposit_required": false
+  },
+  "escalation_triggers": [
+    "complaint",
+    "medical question",
+    "pricing negotiation",
+    "more than 2 unanswered questions in a row",
+    "explicit request to speak to a human",
+    "angry or abusive language",
+    "safety or adverse reaction concern"
+  ],
+  "contact": {
+    "whatsapp": "Available on booking",
+    "website": "Available on booking"
+  }
+}

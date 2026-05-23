@@ -1,0 +1,23 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.pyo
+*.pyd
+.Python
+env/
+venv/
+.venv/
+*.egg-info/
+dist/
+build/
+
+# Environment — NEVER commit real API keys
+.env
+
+# Log files generated at runtime — keep the directory, ignore the content
+logs/*.json
+
+# OS artefacts
+.DS_Store
+Thumbs.db
