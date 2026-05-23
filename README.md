@@ -1,4 +1,4 @@
-# Closira AI Agent — Bloom Aesthetics Clinic
+# Closira AI Agent - Bloom Aesthetics Clinic
 
 A Python-based, multi-stage AI customer support workflow built for the Closira internship assignment.  
 The agent simulates a full inbound chat experience for **Bloom Aesthetics Clinic**, powered by the Groq API (`llama3-70b-8192`).
@@ -128,29 +128,29 @@ closira_agent/
 Rather than maintaining four separate system prompts, a single template is used with three runtime placeholders: `{sop_data}`, `{current_stage}`, and `{stage_instructions}`.  This keeps the agent's identity, tone, and safety rules consistent across all stages while allowing stage-specific behaviour to be swapped in cleanly.
 
 ### Structured JSON escalation signals
-The model is instructed to return a specific JSON object (`"action": "ESCALATE"` or `"action": "LOW_CONFIDENCE"`) rather than plain text when special handling is needed.  This makes detection completely reliable — a simple `try_parse_json()` check is all that is needed, with no regex or fragile text matching.
+The model is instructed to return a specific JSON object (`"action": "ESCALATE"` or `"action": "LOW_CONFIDENCE"`) rather than plain text when special handling is needed.  This makes detection completely reliable - a simple `try_parse_json()` check is all that is needed, with no regex or fragile text matching.
 
 ### External SOP JSON
 Business data is stored in `data/sop.json` rather than hardcoded in Python.  This means the clinic can update prices, services, or policies without a code change, and the SOP can be validated independently.
 
 ### Append-only escalation log
-`logs/escalation_log.json` is never overwritten — new events are appended.  This preserves a complete audit trail for CRM integration and quality assurance.
+`logs/escalation_log.json` is never overwritten - new events are appended.  This preserves a complete audit trail for CRM integration and quality assurance.
 
 ---
 
 ## Known Limitations
 
-- **No persistent memory across sessions** — each run starts fresh.  A real system would store conversation history in a database.
-- **Stage transitions are rule-based** — the FAQ→lead transition is triggered by exchange count or keyword matching, not by semantic understanding of conversation readiness.
-- **SOP is static JSON** — a production system would use a vector database (e.g. Pinecone, Chroma) for semantic retrieval over a much larger knowledge base.
-- **No authentication** — the CLI has no concept of user identity.
+- **No persistent memory across sessions** - each run starts fresh.  A real system would store conversation history in a database.
+- **Stage transitions are rule-based** - the FAQ→lead transition is triggered by exchange count or keyword matching, not by semantic understanding of conversation readiness.
+- **SOP is static JSON** - a production system would use a vector database (e.g. Pinecone, Chroma) for semantic retrieval over a much larger knowledge base.
+- **No authentication** - the CLI has no concept of user identity.
 
 ---
 
 ## Trade-offs
 
 1. **Simplicity vs. flexibility on stage transitions.**  
-   Using a fixed exchange count (3 FAQ turns) to trigger the lead stage is simple and predictable but can feel abrupt.  A more sophisticated approach would use intent classification to detect when the customer is ready to book — but this would add latency and complexity.
+   Using a fixed exchange count (3 FAQ turns) to trigger the lead stage is simple and predictable but can feel abrupt.  A more sophisticated approach would use intent classification to detect when the customer is ready to book - but this would add latency and complexity.
 
 2. **Single API call per turn vs. multi-step chain-of-thought.**  
-   Each user message results in exactly one Groq API call.  A chain-of-thought or multi-step reasoning approach might improve accuracy on edge cases but would significantly increase response latency and API costs — a poor fit for a real-time support chat.
+   Each user message results in exactly one Groq API call.  A chain-of-thought or multi-step reasoning approach might improve accuracy on edge cases but would significantly increase response latency and API costs - a poor fit for a real-time support chat.
